@@ -1,8 +1,9 @@
 package voo;
 
+import java.util.ArrayList;
 import passageiro.Passageiro;
 import aeronave.Aeronave;
-import java.util.ArrayList;
+
 
 public abstract class Voo {
     protected String codigo;
@@ -22,12 +23,66 @@ public abstract class Voo {
         this.aeronave = aeronave;
         this.passageiros = new ArrayList<>();
     }
+    
+    public String getCodigo() {
+    	return codigo;
+    }
+    
+    public String getData() {
+    	return data;
+    }
+    
+    public void setData(String data) {
+    	this.data = data;
+    }
+    
+    public String getHorario() {
+    	return horario;
+    }
+    
+    public void setHorario( String horario) {
+    	this.horario= horario;
+    }
+    
+    public String getOrigem() {
+    	return origem;
+    }
+    
+    public String getDestino() {
+    	return destino;
+    }
+    
+    public Aeronave getAeronave() {
+        return aeronave;
+    }
 
+    public void setAeronave(Aeronave aeronave) {
+        this.aeronave = aeronave;
+    }
+    
     public void cadastrarPassageiro(Passageiro p) {
         passageiros.add(p);
     }
 
+    public ArrayList<Passageiro> getPassageiros() {
+        return new ArrayList<>(passageiros);
+    }
+   
+    
     public abstract boolean verificarDisponibilidade();
+    
+    public abstract void exibirDados() {
+    	System.out.println("Código: " + codigo);
+	    System.out.println("Data: " + data);
+	    System.out.println("Horário: " + horario);
+	    System.out.println("Origem: " + origem);
+	    System.out.println("Destino: " + destino);
+	    System.out.println("Aeronave: " + aeronave);
 
-    public abstract void exibirDados();
+	    System.out.println("Passageiros:");
+	    for (Passageiro p : passageiros) {
+	        System.out.println("- " + p);
+	    }
+	}
+    
 }
