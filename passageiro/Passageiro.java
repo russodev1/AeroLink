@@ -11,6 +11,9 @@ public class Passageiro extends Pessoa implements Validavel {
         this.cpf = cpf;
         this.passaporte = passaporte;
     }
+        public String getCpf() {
+        return cpf;
+    }
 
     @Override
     public boolean validarDocumentos() {
