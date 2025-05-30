@@ -23,10 +23,28 @@ public abstract class Voo {
         this.aeronave = aeronave;
         this.passageiros = new ArrayList<>();
     }
+    
+     private boolean cpfJaNoVoo(String cpfParaVerificar) { 
+        if (cpfParaVerificar == null || cpfParaVerificar.isEmpty()) { 
+            return false;
+        }
+      
+        for (int i = 0; i < this.passageiros.size(); i++) {
+            Passageiro passageiroExistente = this.passageiros.get(i);
+
+            if (passageiroExistente.getCpf() != null && passageiroExistente.getCpf().equals(cpfParaVerificar)) {
+                return true; 
+            }
+        }
+        return false; 
+    }
 
     public void cadastrarPassageiro(Passageiro p) throws LimPassageiroExc {
         if (!verificarDisponibilidade()) {
             throw new LimPassageiroExc("Capacidade máxima atingida para o voo " + codigo);
+        }
+        if (p.getCpf() != null && cpfJaNoVoo(p.getCpf())) {
+            throw new CpfDuplicadoExc("O CPF " + p.getCpf() + " já está cadastrado neste voo (" + codigo + ").");
         }
         passageiros.add(p);
     }
